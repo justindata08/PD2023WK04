@@ -1,0 +1,48 @@
+with pit as (
+SELECT *, 'January' as Month
+FROM PD2023_WK04_JANUARY
+UNION ALL
+SELECT *, 'February' as Month
+FROM PD2023_WK04_FEBRUARY
+UNION ALL
+SELECT *, 'March' as Month
+FROM PD2023_WK04_MARCH
+UNION ALL
+SELECT *, 'April' as Month
+FROM PD2023_WK04_APRIL
+UNION ALL
+SELECT *, 'May' as Month
+FROM PD2023_WK04_MAY
+UNION ALL
+SELECT *, 'June' as Month
+FROM PD2023_WK04_JUNE
+UNION ALL
+SELECT *, 'July' as Month
+FROM PD2023_WK04_JULY
+UNION ALL
+SELECT *, 'August' as Month
+FROM PD2023_WK04_AUGUST
+UNION ALL
+SELECT *, 'September' as Month
+FROM PD2023_WK04_SEPTEMBER
+UNION ALL
+SELECT *, 'October' as Month
+FROM PD2023_WK04_OCTOBER
+UNION ALL
+SELECT *, 'November' as Month
+FROM PD2023_WK04_NOVEMBER
+UNION ALL
+SELECT *, 'December' as Month
+FROM PD2023_WK04_DECEMBER)
+
+SELECT ID
+    ,Ethnicity
+    ,AT
+    ,DOB
+    ,to_Date(Joining_day||'/'||Month||'/'||'2023', 'dd/MMMM/yyyy') as Joining_date
+
+from pit
+PIVOT (Min(value) for DEMOGRAPHIC in ('Ethnicity','Account Type','Date of Birth')) as p
+    (id, joining_day,month,ethnicity,AT,dob)
+
+
